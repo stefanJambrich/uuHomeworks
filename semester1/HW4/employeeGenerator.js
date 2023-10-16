@@ -1,4 +1,14 @@
-class dtoOut {
+//Input data
+const dtoIn = {
+    count: 10,
+    age: {
+        min: 18,
+        max: 65
+    }
+}
+
+//Emplyoee generator
+class Employee {
     constructor(ageMin, ageMax) {
         this.gender = randomNum(0, 2) === 1 ? "male" : "female";
         this.firstName = firstNames[randomNum(0, firstNames.length)];
@@ -33,24 +43,46 @@ const randomWorkload = () => {
 
 const generateRandomDate = (from, to) => {
     return new Date(from.getTime() + Math.random() * (to.getTime() - from.getTime()));
-}
+};
 
-const main = (count, ageMin, ageMax) => {
+const generateEmployeeData = (count, ageMin, ageMax) => {
     let employees = [];
-    
     for (let i = 0; i < count; i++) {
-        employees.push(new dtoOut(ageMin, ageMax));
+        employees.push(new Employee(ageMin, ageMax));
     }
     
     return employees;
-}
+};
 
-const dtoIn = {
-    count: 10,
-    age: {
-        min: 18,
-        max: 65
+//Getting employee statistics
+const getMedian = (arr) => {
+    const mid = Math.floor(arr.length / 2);
+    const sortedArr = arr.sort((a, b) => a - b);
+
+    return arr.length % 2 === 0 ? (sortedArr[mid - 1] + sortedArr[mid]) / 2 : sortedArr[mid];
+}
+    
+const getEmployeeStatistics = (employees) => {
+    const dtoOut = {
+        count: employees.length,
+        workload10: employees.filter(e => e.workload === 10).length,
+        workload20: employees.filter(e => e.workload === 20).length,
+        workload30: employees.filter(e => e.workload === 30).length,
+        workload40: employees.filter(e => e.workload === 40).length,
+        averageAge: Math.floor(employees.reduce((a, b) => a + b.age, 0) / employees.length),
+        minAge: Math.min(...employees.map(e => e.age)),
+        maxAge: Math.max(...employees.map(e => e.age)),
+        medianAge: getMedian(employees.map(e => e.age)),
+        medianWorkload: getMedian(employees.map(e => e.workload)),
+        averageWomenWorkload: getMedian(employees.filter(e => e.gender === 'female').map(e => e.workload)),
+        sortedByWorkload: employees.sort((a, b) => a.workload - b.workload)
     }
+    return dtoOut;
 }
 
-console.log(main(dtoIn.count, dtoIn.age.min, dtoIn.age.max));
+const main = (dtoIn) => {
+    let employees = generateEmployeeData(dtoIn.count, dtoIn.age.min, dtoIn.age.max);
+    return getEmployeeStatistics(employees);
+};
+
+console.log(main(dtoIn));
