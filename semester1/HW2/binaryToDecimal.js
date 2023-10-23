@@ -1,8 +1,4 @@
 const binaryToDecimal = (binaryNum) => {
-    if (!typeof binaryNum === 'string') {
-        return "Invalid input"
-    }
-
     let decimalNum = 0; 
     let binaryNumArr = binaryNum.split("");
 
