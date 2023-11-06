@@ -29,6 +29,8 @@ const randomWorkload = () => {
             return 30;
         case 3:
             return 40;
+        default:
+            return "Invalid workload"
     }
 };
 
