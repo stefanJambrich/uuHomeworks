@@ -1,12 +1,13 @@
-class dtoOut {
-    constructor(ageMin, ageMax) {
-        this.gender = randomNum(0, 2) === 1 ? "male" : "female";
-        this.firstName = firstNames[randomNum(0, firstNames.length)];
-        this.lastName = lastNames[randomNum(0, lastNames.length)];
-        this.age = Math.floor(randomNum(ageMin, ageMax));
-        this.workload = randomWorkload();
-        this.birthdate = generateRandomDate(new Date(1960, 1, 1), new Date(2005, 1, 1));
+const generateEmployees = (ageMin, ageMax) => {
+    const dtoOut ={
+        gender: randomNum(0, 2) === 1 ? "male" : "female",
+        firstName: firstNames[randomNum(0, firstNames.length)],
+        lastName: lastNames[randomNum(0, lastNames.length)],
+        age: Math.floor(randomNum(ageMin, ageMax)),
+        workload: randomWorkload(),
+        birthdate: generateRandomDate(new Date(1960, 1, 1), new Date(2005, 1, 1))
     }
+    return dtoOut;
 }
 
 const firstNames = ["Jan", "Jiří", "Petr", "Josef", "Pavel", "Martin", "Jaroslav", "Tomáš", "Miroslav", "František", "Václav", "Michal", "Karel", "David", "Lukáš", "Jakub", "Zdeněk", "Radek", "Milan", "Miloslav", "Daniel", "Michal", "Marek", "Vladimír", "Aleš", "Jindřich", "Roman", "Vojtěch", "Stanislav", "Miroslav", "Oldřich", "Jiří", "Ivan", "Petr", "Jiří", "Jaroslav", "Pavel", "Petr", "Vladislav", "Petr"];
@@ -39,7 +40,7 @@ const main = (count, ageMin, ageMax) => {
     let employees = [];
     
     for (let i = 0; i < count; i++) {
-        employees.push(new dtoOut(ageMin, ageMax));
+        employees.push(generateEmployees(ageMin, ageMax));
     }
     
     return employees;
