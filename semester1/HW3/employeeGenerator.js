@@ -1,16 +1,23 @@
-const firstNames = ["Jan", "Jiří", "Petr", "Josef", "Pavel", "Martin", "Jaroslav", "Tomáš", "Miroslav", "František", "Václav", "Michal", "Karel", "David", "Lukáš", "Jakub", "Zdeněk", "Radek", "Milan", "Miloslav", "Daniel", "Michal", "Marek", "Vladimír", "Aleš", "Jindřich", "Roman", "Vojtěch", "Stanislav", "Miroslav", "Oldřich", "Jiří", "Ivan", "Petr", "Jiří", "Jaroslav", "Pavel", "Petr", "Vladislav", "Petr"];
+const maleFirstNames = ["Jan", "Jakub", "Tomáš", "Adam", "Petr", "Jiří", "Václav", "Martin", "Marek", "David", "Lukáš", "Michal", "Daniel", "Josef", "Pavel", "Ondřej", "Matěj", "Dominik", "Radek", "Karel", "Stanislav", "Zdeněk", "František", "Roman", "Milan", "Libor", "Filip", "Ladislav", "Jaroslav", "Aleš"];
+const maleLastNames = ["Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera", "Veselý", "Horák", "Marek", "Pokorný", "Král", "Růžička", "Beneš", "Fiala", "Ondráček", "Sedláček", "Mach", "Polák", "Kopecký"];
+const femaleFirstNames = ["Anna", "Marie", "Jana", "Eva", "Hana", "Kateřina", "Lenka", "Lucie", "Michaela", "Markéta", "Tereza", "Zuzana", "Klára", "Veronika", "Petra", "Martina", "Barbora", "Simona", "Kristýna", "Nikola"];
+const femaleLastNames = ["Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková", "Kučerová", "Veselá", "Horáková", "Marková", "Pokorná", "Králová", "Růžičková", "Benešová", "Fialová", "Ondráčková", "Sedláčková", "Machová", "Poláková", "Kopecká"];
 
-const lastNames = ["Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera", "Veselý", "Horák", "Němec", "Marek", "Pospíšil", "Pokorný", "Hájek", "Král", "Růžička", "Beneš", "Fiala", "Sedláček", "Doležal", "Zeman", "Kolář", "Krejčí", "Němcová", "Dvořáková", "Kučerová", "Nováková", "Mareková", "Pokorná", "Pospíšilová", "Hájková", "Jelínková", "Krčmářová", "Křížová"];
 
 const generateEmployees = (ageMin, ageMax) => {
+    console.log(new Date().getFullYear() - ageMin)
+    const employeeGender = randomNum(0, 2) === 1 ? "male" : "female";
+    const employeeBirthdate = generateRandomDate(new Date((new Date().getFullYear() - ageMax), 0, 1), new Date((new Date().getFullYear() - ageMin), 0, 1));
+    
     const dtoOut ={
-        gender: randomNum(0, 2) === 1 ? "male" : "female",
-        firstName: firstNames[randomNum(0, firstNames.length)],
-        lastName: lastNames[randomNum(0, lastNames.length)],
-        age: Math.floor(randomNum(ageMin, ageMax)),
+        gender: employeeGender,
+        firstName: employeeGender === "male" ? maleFirstNames[randomNum(0, maleFirstNames.length)] : femaleFirstNames[randomNum(0, femaleFirstNames.length)],
+        lastName: employeeGender === "male" ? maleLastNames[randomNum(0, maleLastNames.length)] : femaleLastNames[randomNum(0, femaleLastNames.length)],
+        age: new Date().getFullYear() - employeeBirthdate.getFullYear(),
         workload: randomWorkload(),
-        birthdate: generateRandomDate(new Date(1960, 1, 1), new Date(2005, 1, 1))
+        birthdate: employeeBirthdate
     }
+
     return dtoOut;
 }
 
@@ -52,7 +59,7 @@ const dtoIn = {
     count: 10,
     age: {
         min: 18,
-        max: 65
+        max: 30
     }
 }
 
