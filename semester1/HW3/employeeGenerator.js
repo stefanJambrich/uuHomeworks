@@ -5,7 +5,6 @@ const femaleLastNames = ["Nováková", "Svobodová", "Novotná", "Dvořáková",
 
 
 const generateEmployees = (ageMin, ageMax) => {
-    console.log(new Date().getFullYear() - ageMin)
     const employeeGender = randomNum(0, 2) === 1 ? "male" : "female";
     const employeeBirthdate = generateRandomDate(new Date((new Date().getFullYear() - ageMax), 0, 1), new Date((new Date().getFullYear() - ageMin), 0, 1));
     
