@@ -25,7 +25,7 @@ const randomNum = (min, max) => {
 };
 
 const randomWorkload = () => {
-    const n = randomNum(0, 3);
+    const n = randomNum(0, 4);
     switch (n) {
         case 0:
             return 10;
