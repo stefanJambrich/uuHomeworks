@@ -54,11 +54,11 @@ const getMedian = (array) => {
     return arraySorted.length % 2 === 0 ? (arraySorted[arraySorted.length / 2 - 1] + arraySorted[arraySorted.length / 2]) / 2 : arraySorted[Math.floor(arraySorted.length / 2)];
 }
 
-const generateEmployeeData = (count, ageMin, ageMax) => {
+const generateEmployeeData = ({count, age}) => {
     let employees = [];
     
     for (let i = 0; i < count; i++) {
-        employees.push(generateEmployees(ageMin, ageMax));
+        employees.push(generateEmployees(age.min, age.max));
     }
     
     return employees;
@@ -86,7 +86,7 @@ const getEmployeeStatistics = (employees) => {
 }
 
 const main = (dtoIn) => {
-    const employees = generateEmployeeData(dtoIn.count, dtoIn.age.min, dtoIn.age.max);
+    const employees = generateEmployeeData(dtoIn);
     return getEmployeeStatistics(employees);
 }
 
