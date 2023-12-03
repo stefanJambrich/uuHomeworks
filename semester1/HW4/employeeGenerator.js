@@ -15,7 +15,7 @@ const generateEmployees = (ageMin, ageMax) => {
         lastName: employeeGender === "male" ? maleLastNames[randomNum(0, maleLastNames.length)] : femaleLastNames[randomNum(0, femaleLastNames.length)],
         age: new Date().getFullYear() - employeeBirthdate.getFullYear(),
         workload: randomWorkload(),
-        birthdate: employeeBirthdate
+        birthdate: employeeBirthdate.toISOString()
     }
 
     return dtoOut;
